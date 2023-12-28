@@ -72,17 +72,7 @@ class AlfanoReader:
                         new_session.set_lap(i, lap_rows)
                         i += 1
             #return "For debugging, just try to get 1 file through first"
-
-    def write_sessions(self):
-        outputDirectory = getDocumentDir()
-        for session in self._sessions:
-            #print(session)
-            dataFile = "trackAttack_from_Alfano6_{}_{}.csv".format(
-            session.summary["track"],
-            session.summary["date"] + "_" + session.summary["time"].replace(":",""))
-            dataFilePath = os.path.join(outputDirectory, dataFile)
-            print(dataFilePath)
-            session.writeTrackAttackCsv(dataFilePath)
+        return self._sessions
 
 
 class AlfanoSession:
@@ -122,7 +112,33 @@ class AlfanoSession:
     def laps(self):
         return self._laps
 
-    def writeTrackAttackCsv(self, ta_file_name):
+
+class AssettoCorsaWriter:
+    out_dir = "."
+    sessions=None
+
+    def __init__(self, sessions, outputDirectory=None):
+        self.out_dir = outputDirectory or getDocumentDir()
+        self.sessions=sessions
+        assert sessions
+
+    def write_sessions(self):
+        for session in self.sessions:
+            self.session = session
+            self.write_session()
+
+    def write_session(self):
+        outputDirectory = self.out_dir
+        session = self.session
+        #print(session)
+        # dataFile = "trackAttack_from_Alfano6_{}_{}.csv".format(
+        session.summary["track"],
+        session.summary["date"] + "_" + session.summary["time"].replace(":",""))
+        dataFilePath = os.path.join(outputDirectory, dataFile)
+        print(dataFilePath)
+        self.writeOutputFile(dataFilePath)
+
+    def writeOutputFile(self, ta_file_name):
         #with gzip.open(ta_file_name, 'wt') as dataFile:
         with open(ta_file_name, 'wt') as dataFile:
             dataFileWriter = csv.writer(dataFile,delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
@@ -137,18 +153,18 @@ class AlfanoSession:
 
     def writeFileMetaData(self, dataFileWriter):
         dataFileWriter.writerow(["Format","Assetto Corsa CSV File"])
-        dataFileWriter.writerow(["Data Source",self.summary["device"]])
-        dataFileWriter.writerow(["Date",self.summary["date"]])
-        dataFileWriter.writerow(["Time",self.summary["time"]])
+        dataFileWriter.writerow(["Data Source",self.session.summary["device"]])
+        dataFileWriter.writerow(["Date",self.session.summary["date"]])
+        dataFileWriter.writerow(["Time",self.session.summary["time"]])
         # dataFileWriter.writerow(["smVersion",info.static._smVersion])
         # dataFileWriter.writerow(["acVersion",info.static._acVersion])
         dataFileWriter.writerow(["numberOfSessions",1])
         dataFileWriter.writerow(["numCars",1])
         #dataFileWriter.writerow(["carModel",info.static.carModel])
-        dataFileWriter.writerow(["track",self.summary["track"]])
-        dataFileWriter.writerow(["playerName",self.summary["driver"]])
-        dataFileWriter.writerow(["playerNick",self.summary["driver"]])
-        dataFileWriter.writerow(["playerSurname",self.summary["driver"]])
+        dataFileWriter.writerow(["track",self.session.summary["track"]])
+        dataFileWriter.writerow(["playerName",self.session.summary["driver"]])
+        dataFileWriter.writerow(["playerNick",self.session.summary["driver"]])
+        dataFileWriter.writerow(["playerSurname",self.session.summary["driver"]])
         dataFileWriter.writerow(["sectorCount",self.sectors_found()])
 
     def sectors_found(self):
@@ -156,7 +172,7 @@ class AlfanoSession:
         s = 1
         sector_sum = [0]*6
         for s in range(1,7):
-            for row in self.data_rows[1:]:
+            for row in self.session.data_rows[1:]:
                 sector_sum[s-1] += int(row[1+s])
         for i in range(0,5):
             if sector_sum[i] == 0:
@@ -347,12 +363,12 @@ class AlfanoSession:
         row_header = "Partiel,RPM,Speed GPS,T1,T2,Gf. X,Gf. Y,Orientation,Speed rear,Lat.,Lon.,Altitude"
 
         num_lap=0
-        for lap in self.laps():
+        for lap in self.session.laps():
             num_lap+=1
             for row_UNUSED in lap:
-                #print(self.get_lap_headers())
-                #print(self.get_lap(num_lap)[0])
-                laprows=self.get_lap_map(num_lap)
+                #print(self.session.get_lap_headers())
+                #print(self.session.get_lap(num_lap)[0])
+                laprows=self.session.get_lap_map(num_lap)
                 for row in laprows:
                     dataFileWriter.writerow([
                     row["Gf. X"],
@@ -440,91 +456,4 @@ class AlfanoSession:
                     row["Lon."],
                     row["Altitude"]
                 ])
-
-
-                """
-                    info.physics.accG[0],
-                    info.physics.accG[1],
-                    info.physics.accG[2],
-                    info.physics.brake,
-                    info.physics.camberRAD[0],
-                    info.physics.camberRAD[1],
-                    info.physics.camberRAD[2],
-                    info.physics.camberRAD[3],
-                    info.physics.carDamage[0],
-                    info.physics.carDamage[1],
-                    info.physics.carDamage[2],
-                    info.physics.carDamage[3],
-                    info.physics.carDamage[4],
-                    info.physics.cgHeight,
-                    info.physics.drs,
-                    info.physics.tc,
-                    info.physics.fuel,
-                    info.physics.gas,
-                    info.physics.gear,
-                    info.physics.numberOfTyresOut,
-                    info.physics.packetId,
-                    info.physics.heading,
-                    info.physics.pitch,
-                    info.physics.roll,
-                    info.physics.rpms,
-                    info.physics.speedKmh,
-                    info.physics.steerAngle,
-                    info.physics.suspensionTravel[0],
-                    info.physics.suspensionTravel[1],
-                    info.physics.suspensionTravel[2],
-                    info.physics.suspensionTravel[3],
-                    info.physics.tyreCoreTemperature[0],
-                    info.physics.tyreCoreTemperature[1],
-                    info.physics.tyreCoreTemperature[2],
-                    info.physics.tyreCoreTemperature[3],
-                    info.physics.tyreDirtyLevel[0],
-                    info.physics.tyreDirtyLevel[1],
-                    info.physics.tyreDirtyLevel[2],
-                    info.physics.tyreDirtyLevel[3],
-                    info.physics.tyreWear[0],
-                    info.physics.tyreWear[1],
-                    info.physics.tyreWear[2],
-                    info.physics.tyreWear[3],
-                    info.physics.velocity[0],
-                    info.physics.velocity[1],
-                    info.physics.velocity[2],
-                    info.physics.wheelAngularSpeed[0],
-                    info.physics.wheelAngularSpeed[1],
-                    info.physics.wheelAngularSpeed[2],
-                    info.physics.wheelAngularSpeed[3],
-                    info.physics.wheelLoad[0],
-                    info.physics.wheelLoad[1],
-                    info.physics.wheelLoad[2],
-                    info.physics.wheelLoad[3],
-                    info.physics.wheelSlip[0],
-                    info.physics.wheelSlip[1],
-                    info.physics.wheelSlip[2],
-                    info.physics.wheelSlip[3],
-                    info.physics.wheelsPressure[0],
-                    info.physics.wheelsPressure[1],
-                    info.physics.wheelsPressure[2],
-                    info.physics.wheelsPressure[3],
-
-                    info.graphics.packetId,
-                    info.graphics.status,
-                    info.graphics.session,
-                    info.graphics.completedLaps,
-                    info.graphics.position,
-                    info.graphics.currentTime,
-                    info.graphics.iCurrentTime/1000,
-                    info.graphics.iLastTime/1000,
-                    info.graphics.iBestTime,
-                    info.graphics.sessionTimeLeft,
-                    info.graphics.distanceTraveled,
-                    info.graphics.isInPit,
-                    info.graphics.currentSectorIndex,
-                    info.graphics.lastSectorTime,
-                    info.graphics.numberOfLaps,
-                    info.graphics.replayTimeMultiplier,
-                    info.graphics.normalizedCarPosition,
-                    info.graphics.carCoordinates[0],
-                    info.graphics.carCoordinates[1],
-                    info.graphics.carCoordinates[2]
-                """
 
