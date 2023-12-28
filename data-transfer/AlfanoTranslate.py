@@ -7,7 +7,8 @@ import csv
 import math
 import gzip
 
-from inout.Alfano import AlfanoReader, AssettoCorsaWriter
+from inout.Alfano import AlfanoReader
+from inout.AssettoCorsa import AssettoCorsaWriter
 
 
 if __name__=="__main__":
