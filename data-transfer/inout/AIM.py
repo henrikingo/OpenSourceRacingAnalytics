@@ -21,6 +21,7 @@ class Writer:
 
     def __init__(self, sessions, outputDirectory=None):
         self.out_dir = outputDirectory or getDocumentDir()
+        self.out_dir = os.path.expanduser(self.out_dir)
         self.sessions=sessions
         assert sessions
 
@@ -96,7 +97,7 @@ class Writer:
         s = 1
         sector_sum = [0]*6
         for s in range(1,7):
-            for row in self.session.data_rows[1:]:
+            for row in self.session.lap_summary_rows[1:]:
                 sector_sum[s-1] += int(row[1+s])
         for i in range(0,5):
             if sector_sum[i] == 0:
@@ -108,26 +109,28 @@ class Writer:
         ])
 
     def writeHeaderUnits(self,dataFileWriter):
+
         dataFileWriter.writerow([
+            "","","","msec","s","msec","s",
             "s","km/h"," ","g","g","deg","deg","deg/s","m","m","m/s","m","deg","deg","°C","°C","g","g","g","deg/s","deg/s","deg/s","V","rpm"
         ])
 
     def writeRaceData(self, dataFileWriter):
         SUMMARY_FIELDS1 = "date,time,laps,some number,track,driver,zeros,apostrophe,fifty,empty string,fifty,device,END,1,0, ,no delete partiel,,samplerate,class,session type,date,time,track,driver,NOT USED,NOT USED".split(',')
-        row_header = "Partiel,RPM,Speed GPS,T1,T2,Gf. X,Gf. Y,Orientation,Speed rear,Lat.,Lon.,Altitude"
+        row_header = "Partiel,RPM,Speed_GPS,T1,T2,Gf. X,Gf. Y,Orientation,Speed rear,Lat.,Lon.,Altitude"
 
         num_lap=0
         for lap in self.session.laps():
             num_lap+=1
-            #print (num_lap, len(self.session.data_rows))
-            lapdata = self.session.data_rows[num_lap-1]
+            lapdata = self.session.lap_summary_rows[num_lap-1]
             laprows=self.session.get_lap_map(num_lap)
-            compheaders, comprows=self.session.computed_rows(num_lap)
+            compheaders=self.session.computed_rows_headers()
+            comprows=self.session.computed_rows(num_lap)
             for row, comprow in zip(laprows,comprows):
                 dataFileWriter.writerow(
                     comprow + [
 #                    [comprow[0],
-                    row["Speed GPS"],
+                    row["Speed_GPS"],
                     lapdata[-1], # "Hdop"
                     0,
                     0, # TODO can also be computed from speed?
@@ -138,15 +141,15 @@ class Writer:
                     0,
                     0,
                     0,
-                    row["Lat."],
-                    row["Lon."],
+                    row["Lat"],
+                    row["Lon"],
                     row["T1"],    # TODO these are wrong but want to produce exactly the sample file for now.
                     row["T2"],
-                    row["Gf. X"],
-                    row["Gf. Y"],
+                    row["GfX"],
+                    row["GfY"],
                     0,
-                    row["Gf. X"],
-                    row["Gf. Y"],
+                    row["GfX"],
+                    row["GfY"],
                     0,
                     lapdata[-3], # "Vbattery"
                     row["RPM"]
