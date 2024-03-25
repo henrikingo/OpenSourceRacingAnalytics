@@ -1,0 +1,381 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 19,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "gridPos": {
+        "h": 17,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"width: 100%; height:200px;\">\n<img src=\"https://static.wixstatic.com/media/fdfb63_286b3a73bed44a9daef12d208d6024ed~mv2.jpg\" \nstyle=\"width:100%;\"\nalt=\"Albert in Lahti IAME race\">\n</div>",
+        "mode": "html"
+      },
+      "pluginVersion": "11.0.0-68547",
+      "title": "2023",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sess"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Show race data",
+                    "url": "https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=${__data.fields[\"timeAsLong\"]}&to=${__data.fields[\"timeAsLongEnd\"]}"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 320
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "timeAsLong"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 20
+              },
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "timeAsLongEnd"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 20
+              },
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 27,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 2,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.0-68547",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "parsedQuery": "OSRA.tsLaps.aggregate([{\"$sort\":{\"time\":1}},{\"$match\":{\"labels.session_type\":{\"$ne\":\"RACE\"}}},{\"$limit\":10000},{\"$addFields\":{\"timeAsString\":{\"$toString\":\"$time\"},\"timeAsLong\":{\"$toLong\":\"$time\"},\"timeAsLongEnd\":{\"$add\":[{\"$toLong\":\"$time\"},50000000]}}},{\"$project\":{\"_id\":false,\"time\":false}},{\"$addFields\":{\"url\":{\"$concat\":[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{\"$toString\":\"$timeAsLong\"},\"&to=\",{\"$toString\":\"$timeAsLongEnd\"}]}}},{\"$project\":{\"_id\":false,\"labels\":true,\"url\":true,\"timeAsLong\":true,\"timeAsLongEnd\":true}},{\"$group\":{\"_id\":{\"driver\":\"$labels.driver\",\"track\":\"$labels.track\",\"date\":\"$labels.date\"},\"url\":{\"$first\":\"$url\"},\"fastest_lap\":{\"$min\":\"$labels.fastest_lap\"},\"sess\":{\"$first\":\"$labels.sessionId\"},\"sessionType\":{\"$first\":\"$labels.session_type\"},\"timeAsLong\":{\"$min\":\"$timeAsLong\"},\"timeAsLongEnd\":{\"$max\":\"$timeAsLong\"},\"laps\":{\"$sum\":1}}},{\"$sort\":{\"_id.date\":1,\"_id.track\":1,\"_id.driver\":1}},{\"$project\":{\"_id\":false,\"date\":\"$_id.date\",\"driver\":\"$_id.driver\",\"track\":\"$_id.track\",\"sess\":{\"$concat\":[\"$sessionType\",\": \",{\"$toString\":\"$laps\"},\" laps \",{\"$toString\":\"$fastest_lap\"},\" fastest.\"]},\"timeAsLong\":{\"$subtract\":[\"$timeAsLong\",1000000]},\"timeAsLongEnd\":{\"$add\":[\"$timeAsLongEnd\",1000000]}}}])",
+          "query": "OSRA.tsLaps.aggregate([\n{$sort:{time:1}},\n{$match:{\"labels.session_type\":{$ne:\"RACE\"}}},\n{$limit:10000},\n{$addFields:{timeAsString:{$toString:\"$time\"},\n              timeAsLong:{$toLong:\"$time\"},\n              timeAsLongEnd:{$add:[{$toLong:\"$time\"},50000000]},\n}},\n{$project:{_id:false,time:false}},\n{$addFields:{url:{$concat:[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{$toString:\"$timeAsLong\"},\"&to=\",{$toString:\"$timeAsLongEnd\"}]}}},\n{$project:{\n    _id:false, labels:true,\n    url:true,\n    timeAsLong:true, timeAsLongEnd:true\n}},\n{$group:{\n  _id:{driver:\"$labels.driver\",track:\"$labels.track\", date:\"$labels.date\"},\n  url:{$first:\"$url\"},\n  fastest_lap:{$min:\"$labels.fastest_lap\"},\n  sess:{$first:\"$labels.sessionId\"},\n  sessionType: {$first:\"$labels.session_type\"},\n  timeAsLong:{$min:\"$timeAsLong\"},\n  timeAsLongEnd:{$max:\"$timeAsLong\"},\n  laps: {$sum:1}\n}},\n{$sort:{\"_id.date\":1, \"_id.track\":1,\"_id.driver\":1,   }},\n\n{$project:{\n  _id:false,\n  date:\"$_id.date\",\n  driver:\"$_id.driver\",\n  track:\"$_id.track\",\n  sess:{$concat:[\"$sessionType\", \": \", {$toString:\"$laps\"}, \" laps \", {$toString:\"$fastest_lap\"}, \" fastest.\"]},\n  timeAsLong:{$subtract:[\"$timeAsLong\",1000000]},\n  timeAsLongEnd:{$add:[\"$timeAsLongEnd\",1000000]},\n}}\n\n])",
+          "queryType": "query",
+          "refId": "A"
+        }
+      ],
+      "title": "2023 Practice",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "date": 0,
+              "driver": 1,
+              "sess": 3,
+              "timeAsLong": 4,
+              "timeAsLongEnd": 5,
+              "track": 2
+            },
+            "renameByName": {
+              "sess": "CTRL+Click to view"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sess"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Show race data",
+                    "url": "https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=${__data.fields[\"timeAsLong\"]}&to=${__data.fields[\"timeAsLongEnd\"]}"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 320
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "timeAsLong"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 20
+              },
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "timeAsLongEnd"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 20
+              },
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 27,
+        "w": 12,
+        "x": 12,
+        "y": 17
+      },
+      "id": 3,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.0-68547",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "parsedQuery": "OSRA.tsLaps.aggregate([{\"$sort\":{\"time\":1}},{\"$match\":{\"labels.session_type\":\"RACE\"}},{\"$limit\":10000},{\"$addFields\":{\"timeAsString\":{\"$toString\":\"$time\"},\"timeAsLong\":{\"$toLong\":\"$time\"},\"timeAsLongEnd\":{\"$add\":[{\"$toLong\":\"$time\"},50000000]}}},{\"$project\":{\"_id\":false,\"time\":false}},{\"$addFields\":{\"url\":{\"$concat\":[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{\"$toString\":\"$timeAsLong\"},\"&to=\",{\"$toString\":\"$timeAsLongEnd\"}]}}},{\"$project\":{\"_id\":false,\"labels\":true,\"url\":true,\"timeAsLong\":true,\"timeAsLongEnd\":true}},{\"$group\":{\"_id\":{\"driver\":\"$labels.driver\",\"track\":\"$labels.track\",\"date\":\"$labels.date\"},\"url\":{\"$first\":\"$url\"},\"fastest_lap\":{\"$min\":\"$labels.fastest_lap\"},\"sess\":{\"$first\":\"$labels.sessionId\"},\"sessionType\":{\"$first\":\"$labels.session_type\"},\"timeAsLong\":{\"$min\":\"$timeAsLong\"},\"timeAsLongEnd\":{\"$max\":\"$timeAsLong\"},\"laps\":{\"$sum\":1}}},{\"$sort\":{\"_id.date\":1,\"_id.track\":1,\"_id.driver\":1}},{\"$project\":{\"_id\":false,\"date\":\"$_id.date\",\"driver\":\"$_id.driver\",\"track\":\"$_id.track\",\"sess\":{\"$concat\":[\"$sessionType\",\": \",{\"$toString\":\"$laps\"},\" laps \",{\"$toString\":\"$fastest_lap\"},\" fastest.\"]},\"timeAsLong\":{\"$subtract\":[\"$timeAsLong\",1000000]},\"timeAsLongEnd\":{\"$add\":[\"$timeAsLongEnd\",1000000]}}}])",
+          "query": "OSRA.tsLaps.aggregate([\n{$sort:{time:1}},\n{$match:{\"labels.session_type\":\"RACE\"}},\n{$limit:10000},\n{$addFields:{timeAsString:{$toString:\"$time\"},\n              timeAsLong:{$toLong:\"$time\"},\n              timeAsLongEnd:{$add:[{$toLong:\"$time\"},50000000]},\n}},\n{$project:{_id:false,time:false}},\n{$addFields:{url:{$concat:[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{$toString:\"$timeAsLong\"},\"&to=\",{$toString:\"$timeAsLongEnd\"}]}}},\n{$project:{\n    _id:false, labels:true,\n    url:true,\n    timeAsLong:true, timeAsLongEnd:true\n}},\n{$group:{\n  _id:{driver:\"$labels.driver\",track:\"$labels.track\", date:\"$labels.date\"},\n  url:{$first:\"$url\"},\n  fastest_lap:{$min:\"$labels.fastest_lap\"},\n  sess:{$first:\"$labels.sessionId\"},\n  sessionType: {$first:\"$labels.session_type\"},\n  timeAsLong:{$min:\"$timeAsLong\"},\n  timeAsLongEnd:{$max:\"$timeAsLong\"},\n  laps: {$sum:1}\n}},\n{$sort:{\"_id.date\":1, \"_id.track\":1,\"_id.driver\":1,   }},\n\n{$project:{\n  _id:false,\n  date:\"$_id.date\",\n  driver:\"$_id.driver\",\n  track:\"$_id.track\",\n  sess:{$concat:[\"$sessionType\", \": \", {$toString:\"$laps\"}, \" laps \", {$toString:\"$fastest_lap\"}, \" fastest.\"]},\n  timeAsLong:{$subtract:[\"$timeAsLong\",1000000]},\n  timeAsLongEnd:{$add:[\"$timeAsLongEnd\",1000000]},\n}}\n\n])",
+          "queryType": "query",
+          "refId": "A"
+        }
+      ],
+      "title": "2023 Races",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "date": 0,
+              "driver": 1,
+              "sess": 3,
+              "timeAsLong": 4,
+              "timeAsLongEnd": 5,
+              "track": 2
+            },
+            "renameByName": {
+              "sess": "CTRL + Click to view"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 44
+      },
+      "id": 5,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "Data from Alfano 6, link coming...\n\nConverted to CSV and JSON/MongoDB with [Open Source Racing Analytics Upload.py](https://github.com/henrikingo/OpenSourceRacingAnalytics)\n\nOfficial race data: [Scorit.live](https://scorit.live)\n\nWeather data: coming...\n\nPhotos:\n\n* Albert's photo folder: coming\n* [IAME Finland official Photos](https://racekernel.com/photos.php)\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.3.0-64796",
+      "title": "Sources",
+      "type": "text"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2023-07-13T16:05:48.000Z",
+    "to": "2023-07-13T16:07:00.000Z"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "",
+  "title": "Table of Contents - public",
+  "uid": "eb3c9e81-424f-4c95-816b-45f779789938",
+  "version": 22,
+  "weekStart": ""
+}

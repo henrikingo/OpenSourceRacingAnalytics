@@ -1,0 +1,1776 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 17,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#F2495C",
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": null
+              },
+              {
+                "color": "#073b00",
+                "value": 1
+              },
+              {
+                "color": "#0a5600",
+                "value": 5
+              },
+              {
+                "color": "#1b9a0a",
+                "value": 10
+              },
+              {
+                "color": "#3eaf2f",
+                "value": 15
+              },
+              {
+                "color": "light-green",
+                "value": 20
+              },
+              {
+                "color": "super-light-green",
+                "value": 30
+              },
+              {
+                "color": "dark-green",
+                "value": 40
+              },
+              {
+                "color": "green",
+                "value": 50
+              },
+              {
+                "color": "super-light-orange",
+                "value": 60
+              },
+              {
+                "color": "#ff8630",
+                "value": 70
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 90
+              },
+              {
+                "color": "super-light-red",
+                "value": 91
+              },
+              {
+                "color": "red",
+                "value": 92
+              },
+              {
+                "color": "super-light-red",
+                "value": 93
+              },
+              {
+                "color": "red",
+                "value": 94
+              },
+              {
+                "color": "red",
+                "value": 95
+              },
+              {
+                "color": "dark-red",
+                "value": 96
+              },
+              {
+                "color": "red",
+                "value": 97
+              },
+              {
+                "color": "dark-red",
+                "value": 98
+              },
+              {
+                "color": "red",
+                "value": 99
+              },
+              {
+                "color": "dark-red",
+                "value": 100
+              },
+              {
+                "color": "semi-dark-purple",
+                "value": 110
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 22,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "interval": "1ms",
+      "maxDataPoints": 2000,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": true,
+          "showDebug": true,
+          "showMeasure": true,
+          "showScale": true,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": false,
+              "style": {
+                "color": {
+                  "field": "Speed_GPS",
+                  "fixed": "dark-green"
+                },
+                "opacity": 1,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "clamped"
+                },
+                "size": {
+                  "fixed": 2,
+                  "max": 5,
+                  "min": 1
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/cross.svg",
+                  "mode": "fixed"
+                },
+                "symbolAlign": {
+                  "horizontal": "center",
+                  "vertical": "center"
+                },
+                "text": {
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "filterData": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "location": {
+              "latitude": "Lat",
+              "longitude": "Lon",
+              "mode": "coords"
+            },
+            "name": "Layer 1",
+            "opacity": 1,
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "allLayers": true,
+          "id": "coords",
+          "lat": 61.926629,
+          "lon": 20.246791,
+          "padding": 1,
+          "shared": true,
+          "zoom": 5.72
+        }
+      },
+      "pluginVersion": "11.0.0-68547",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "hide": false,
+          "parsedQuery": "OSRA.tsMetrics.aggregate([{\"$sort\":{\"time\":1}},{\"$match\":{\"time\":{\"$gte\":$__timeFrom,\"$lte\":$__timeTo}}},{\"$setWindowFields\":{\"sortBy\":{\"time\":1},\"output\":{\"docsInInterval\":{\"$sum\":1,\"window\":{\"unit\":\"millisecond\",\"range\":[{\"$subtract\":[-1,{\"$toLong\":{\"$divide\":[{\"$subtract\":[{\"$toLong\":$__timeTo},{\"$toLong\":$__timeFrom}]},3000]}}]},\"current\"]}}}}},{\"$addFields\":{\"timeAsLong\":{\"$toLong\":\"$time\"}}},{\"$addFields\":{\"timeHash\":{\"$mod\":[\"$timeAsLong\",\"$docsInInterval\"]}}},{\"$match\":{\"timeHash\":{\"$lte\":50}}},{\"$limit\":3000},{\"$project\":{\"_id\":false,\"labels\":false,\"grafanaFilter\":false,\"wallClockUtc\":false}}])",
+          "query": "OSRA.tsMetrics.aggregate([\n   {$sort:{time:1}},\n   {$match:{\n         time:{$gte:$__timeFrom, $lte:$__timeTo}}},\n   {$setWindowFields: {\n         sortBy: { time: 1 },\n         output: {\n               docsInInterval:{\n               $sum:1,\n               window: {\n                  unit:\"millisecond\",\n                  range:[\n                     {$subtract:[-1,{$toLong:{$divide:[{$subtract:[{$toLong:$__timeTo},{$toLong:$__timeFrom}]},3000]}}]},\n                     \"current\"\n                  ],\n               }\n               }\n         }\n         \n      }},\n   {$addFields:{\n   timeAsLong:{$toLong:\"$time\"},\n   }},\n      {$addFields:{\n         timeHash:{$mod:[\"$timeAsLong\",\"$docsInInterval\"]}\n      }},\n      {$match:{timeHash:{$lte:50}}},\n   {$limit:3000},\n   {$project:{_id:false,labels:false,grafanaFilter:false,wallClockUtc:false}},\n\n\n])",
+          "queryType": "query",
+          "refId": "A"
+        }
+      ],
+      "title": "map",
+      "transparent": true,
+      "type": "geomap"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "description": "by date, track and laps",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "semi-dark-red",
+            "mode": "thresholds"
+          },
+          "custom": {
+            "fillOpacity": 74,
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": 3600000,
+            "lineWidth": 0,
+            "spanNulls": false
+          },
+          "displayName": ".",
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 1
+              },
+              {
+                "color": "#EF843C",
+                "value": 2
+              },
+              {
+                "color": "#E24D42",
+                "value": 3
+              },
+              {
+                "color": "#1F78C1",
+                "value": 4
+              },
+              {
+                "color": "#BA43A9",
+                "value": 5
+              },
+              {
+                "color": "#705DA0",
+                "value": 6
+              },
+              {
+                "color": "#508642",
+                "value": 7
+              },
+              {
+                "color": "#CCA300",
+                "value": 8
+              },
+              {
+                "color": "#447EBC",
+                "value": 9
+              },
+              {
+                "color": "#C15C17",
+                "value": 10
+              },
+              {
+                "color": "#890F02",
+                "value": 11
+              },
+              {
+                "color": "#0A437C",
+                "value": 12
+              },
+              {
+                "color": "#6D1F62",
+                "value": 13
+              },
+              {
+                "color": "#584477",
+                "value": 14
+              },
+              {
+                "color": "#B7DBAB",
+                "value": 15
+              },
+              {
+                "color": "#F4D598",
+                "value": 20
+              },
+              {
+                "color": "#70DBED",
+                "value": 30
+              },
+              {
+                "color": "#F9BA8F",
+                "value": 40
+              },
+              {
+                "color": "#E0752D",
+                "value": 41
+              },
+              {
+                "color": "#BF1B00",
+                "value": 42
+              },
+              {
+                "color": "#0A50A1",
+                "value": 43
+              },
+              {
+                "color": "#962D82",
+                "value": 44
+              },
+              {
+                "color": "#614D93",
+                "value": 45
+              },
+              {
+                "color": "#F29191",
+                "value": 50
+              },
+              {
+                "color": "#82B5D8",
+                "value": 51
+              },
+              {
+                "color": "#E5A8E2",
+                "value": 52
+              },
+              {
+                "color": "#AEA2E0",
+                "value": 53
+              },
+              {
+                "color": "#629E51",
+                "value": 54
+              },
+              {
+                "color": "#E5AC0E",
+                "value": 55
+              },
+              {
+                "color": "#64B0C8",
+                "value": 56
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "url"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Zoom to lap",
+                    "url": "${__value.text}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 13,
+      "options": {
+        "alignValue": "left",
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "mergeValues": true,
+        "rowHeight": 1,
+        "showValue": "always",
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.3.0-64399",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "hide": false,
+          "parsedQuery": "OSRA.tsMetrics.aggregate([{\"$addFields\":{\"nullrow\":{\"$subtract\":[{\"$convert\":{\"input\":\"$labels.laps\",\"to\":\"int\"}},\"$lap\"]},\"lap\":{\"$cond\":{\"if\":{\"$lt\":[{\"$convert\":{\"input\":\"$labels.laps\",\"to\":\"int\"}},\"$lap\"]},\"then\":null,\"else\":\"$lap\"}},\"total_laps\":{\"$cond\":{\"if\":{\"$lt\":[{\"$convert\":{\"input\":\"$labels.laps\",\"to\":\"int\"}},\"$lap\"]},\"then\":null,\"else\":\"$labels.laps\"}},\"timeAsLong\":{\"$toLong\":\"$time\"}}},{\"$group\":{\"_id\":{\"date\":\"$labels.date\",\"time\":\"$labels.time\",\"track\":\"$labels.track\",\"lap\":\"$lap\",\"sess\":\"$sess2\"},\"total_laps\":{\"$max\":\"$total_laps\"},\"lap\":{\"$max\":\"$lap\"},\"time\":{\"$min\":\"$time\"},\"timeAsLong\":{\"$min\":\"$timeAsLong\"},\"timeAsLongEnd\":{\"$max\":\"$timeAsLong\"},\"lap_time\":{\"$max\":\"$sec_in_lap\"},\"sess\":{\"$first\":\"$sess\"}}},{\"$addFields\":{\"timeAsLongDay\":{\"$add\":[\"$timeAsLong\",50000000]}}},{\"$addFields\":{\"url\":{\"$concat\":[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{\"$toString\":\"$timeAsLong\"},\"&to=\",{\"$toString\":\"$timeAsLongEnd\"}]}}},{\"$addFields\":{\"url24h\":{\"$concat\":[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{\"$toString\":\"$timeAsLong\"},\"&to=\",{\"$toString\":\"$timeAsLongDay\"}]}}}])",
+          "query": "OSRA.tsMetrics.aggregate([\n   {$addFields:{\n         nullrow:{$subtract:[{$convert:{  input:\"$labels.laps\",to:\"int\"}},\"$lap\"]},\n      lap:{$cond:{if:{$lt:[{$convert:{  input:\"$labels.laps\",to:\"int\"}},\"$lap\"]}, then:null, else:\"$lap\"}},\n      total_laps:{$cond:{if:{$lt:[{$convert:{  input:\"$labels.laps\",to:\"int\"}},\"$lap\"]}, then:null, else:\"$labels.laps\"}},\n      timeAsLong:{$toLong:\"$time\"},\n   }},\n   {$group:{_id:{date:\"$labels.date\", time:\"$labels.time\", track:\"$labels.track\", lap:\"$lap\", sess:\"$sess2\"},\n            total_laps:{\n               $max:\"$total_laps\",\n               },\n               lap:{$max:\"$lap\"},\n               time:{$min:\"$time\"},\n               timeAsLong:{$min:\"$timeAsLong\"},\n              timeAsLongEnd:{$max:\"$timeAsLong\"},\n            lap_time:{$max:\"$sec_in_lap\"},\n            sess:{$first:\"$sess\"},\n           }\n  } ,\n  {$addFields:{timeAsLongDay:{$add:[\"$timeAsLong\", 50000000]}}},\n  {$addFields:{url:{$concat:[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{$toString:\"$timeAsLong\"},\"&to=\",{$toString:\"$timeAsLongEnd\"}]}}},\n  {$addFields:{url24h:{$concat:[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{$toString:\"$timeAsLong\"},\"&to=\",{$toString:\"$timeAsLongDay\"}]}}},\n   \n])",
+          "queryType": "query",
+          "refId": "C"
+        }
+      ],
+      "title": "Sessions (drag to zoom)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id.full_lap": true,
+              "_id.lap": true,
+              "_id.sess": true,
+              "_id.time": true,
+              "_id.wallClockUtc": true,
+              "_id.wallClockUtc_msec": true,
+              "lap_time": true,
+              "sess": true,
+              "timeAsLong": true,
+              "timeAsLongDay": true,
+              "timeAsLongEnd": true,
+              "total_laps": false,
+              "url": true,
+              "url24h": true,
+              "wallClockUtc": false,
+              "wallClockUtc_msec": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "_id.date": 1,
+              "_id.lap": 7,
+              "_id.time": 8,
+              "_id.track": 0,
+              "lap": 6,
+              "lap_time": 4,
+              "sess": 5,
+              "time": 9,
+              "timeAsLong": 10,
+              "timeAsLongDay": 11,
+              "timeAsLongEnd": 12,
+              "total_laps": 3,
+              "url": 13,
+              "url24h": 2
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "state-timeline"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "shades"
+          },
+          "custom": {
+            "axisBorderShow": true,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 30,
+            "barAlignment": 1,
+            "drawStyle": "bars",
+            "fillOpacity": 55,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepBefore",
+            "lineWidth": 3,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 1
+              },
+              {
+                "color": "#EF843C",
+                "value": 2
+              },
+              {
+                "color": "#E24D42",
+                "value": 3
+              },
+              {
+                "color": "#1F78C1",
+                "value": 4
+              },
+              {
+                "color": "#BA43A9",
+                "value": 5
+              },
+              {
+                "color": "#705DA0",
+                "value": 6
+              },
+              {
+                "color": "#508642",
+                "value": 7
+              },
+              {
+                "color": "#CCA300",
+                "value": 8
+              },
+              {
+                "color": "#447EBC",
+                "value": 9
+              },
+              {
+                "color": "#C15C17",
+                "value": 10
+              },
+              {
+                "color": "#890F02",
+                "value": 11
+              },
+              {
+                "color": "#0A437C",
+                "value": 12
+              },
+              {
+                "color": "#6D1F62",
+                "value": 13
+              },
+              {
+                "color": "#584477",
+                "value": 14
+              },
+              {
+                "color": "#B7DBAB",
+                "value": 15
+              },
+              {
+                "color": "#F4D598",
+                "value": 20
+              },
+              {
+                "color": "#70DBED",
+                "value": 30
+              },
+              {
+                "color": "#F9BA8F",
+                "value": 40
+              },
+              {
+                "color": "#F29191",
+                "value": 50
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_id.lap"
+            },
+            "properties": [
+              {
+                "id": "custom.lineWidth",
+                "value": 3
+              },
+              {
+                "id": "custom.drawStyle",
+                "value": "line"
+              },
+              {
+                "id": "custom.insertNulls",
+                "value": 2100000
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisLabel"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 65
+              },
+              {
+                "id": "displayName",
+                "value": "Lap"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#383838",
+                  "mode": "shades"
+                }
+              },
+              {
+                "id": "custom.axisSoftMin",
+                "value": 0
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 40
+              },
+              {
+                "id": "custom.lineInterpolation",
+                "value": "stepAfter"
+              },
+              {
+                "id": "custom.pointSize",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 5
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "pluginVersion": "10.3.0-64399",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "hide": false,
+          "parsedQuery": "OSRA.tsLaps.aggregate([{\"$match\":{\"time\":{\"$gte\":$__timeFrom,\"$lte\":$__timeTo}}},{\"$limit\":30000},{\"$project\":{\"_id\":false,\"grafanaFilter\":false,\"wallClockUtc\":false}},{\"$group\":{\"_id\":{\"lap\":\"$lap\",\"track\":\"$labels.track\",\"sess\":{\"$concat\":[\"$labels.date\",\" \",\"$labels.track\",\" \",\"$labels.time\"]},\"time\":\"$time\"},\"seconds\":{\"$max\":\"$time_lap\"},\"time\":{\"$min\":\"$time\"}}},{\"$project\":{\"_id.sess\":false,\"_id.time\":false,\"_id.track\":false}},{\"$sort\":{\"time\":1}}])",
+          "query": "OSRA.tsLaps.aggregate([\n   {$match:{\n         time:{$gte:$__timeFrom, $lte:$__timeTo}}},\n   {$limit:30000},\n   {$project:{_id:false,grafanaFilter:false,wallClockUtc:false}},\n\n\n   {$group:{_id:{lap:\"$lap\",\n                  track:\"$labels.track\",\n                  sess:{$concat:[\"$labels.date\",\" \",\"$labels.track\",\" \",\"$labels.time\"]},\n                  time:\"$time\"\n                  }, \n            seconds:{$max:\"$time_lap\"},\n            time:{$min:\"$time\"},\n      }},\n   {$project:{\"_id.sess\":false, \"_id.time\":false,\"_id.track\":false}},\n   {$sort:{time:1}}\n\n\n   \n])",
+          "queryType": "query",
+          "refId": "B"
+        }
+      ],
+      "title": "Lap times",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "_id.lap": 2,
+              "seconds": 1,
+              "time": 0
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-red",
+            "mode": "continuous-BlYlRd"
+          },
+          "custom": {
+            "axisBorderShow": true,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 7,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "lap"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 28
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 1
+              },
+              {
+                "id": "custom.lineInterpolation",
+                "value": "stepBefore"
+              },
+              {
+                "id": "custom.axisSoftMin",
+                "value": 1
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 40
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.drawStyle",
+                "value": "line"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 10
+      },
+      "id": 6,
+      "interval": "100ms",
+      "maxDataPoints": 10000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "parsedQuery": "OSRA.tsMetrics.aggregate([{\"$sort\":{\"time\":1}},{\"$match\":{\"time\":{\"$gte\":$__timeFrom,\"$lte\":$__timeTo}}},{\"$setWindowFields\":{\"sortBy\":{\"time\":1},\"output\":{\"docsInInterval\":{\"$sum\":1,\"window\":{\"unit\":\"millisecond\",\"range\":[{\"$subtract\":[-1,{\"$toLong\":{\"$divide\":[{\"$subtract\":[{\"$toLong\":$__timeTo},{\"$toLong\":$__timeFrom}]},10000]}}]},\"current\"]}}}}},{\"$addFields\":{\"timeAsLong\":{\"$toLong\":\"$time\"}}},{\"$addFields\":{\"timeHash\":{\"$mod\":[\"$timeAsLong\",\"$docsInInterval\"]}}},{\"$match\":{\"timeHash\":0}},{\"$limit\":10000},{\"$project\":{\"_id\":false,\"labels\":false,\"grafanaFilter\":false,\"wallClockUtc\":false}}])",
+          "query": "OSRA.tsMetrics.aggregate([\n   {$sort:{time:1}},\n   {$match:{\n         time:{$gte:$__timeFrom, $lte:$__timeTo}}},\n   {$setWindowFields: {\n         sortBy: { time: 1 },\n         output: {\n               docsInInterval:{\n               $sum:1,\n               window: {\n                  unit:\"millisecond\",\n                  range:[\n                     {$subtract:[-1,{$toLong:{$divide:[{$subtract:[{$toLong:$__timeTo},{$toLong:$__timeFrom}]},10000]}}]},\n                     \"current\"\n                  ],\n               }\n               }\n         }\n         \n      }},\n   {$addFields:{\n   timeAsLong:{$toLong:\"$time\"},\n   }\n   },\n      {$addFields:{\n         timeHash:{$mod:[\"$timeAsLong\",\"$docsInInterval\"]}\n      }},\n      {$match:{timeHash:0}},\n   {$limit:10000},\n   {$project:{_id:false,labels:false,grafanaFilter:false,wallClockUtc:false}},\n\n\n])",
+          "queryType": "query",
+          "refId": "A"
+        }
+      ],
+      "title": "Speed (km/h)",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Altitude": true,
+              "GfX": true,
+              "GfY": true,
+              "Lat": true,
+              "Lon": true,
+              "Orientation": true,
+              "RPM": true,
+              "Sector": true,
+              "Speed rear": true,
+              "T1": true,
+              "T2": true,
+              "docsInInterval": true,
+              "msec_cumulative": true,
+              "msec_in_lap": true,
+              "row_cumulative": true,
+              "row_in_lap": true,
+              "sec_cumulative": true,
+              "sec_in_lap": true,
+              "timeAsLong": true,
+              "timeHash": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Altitude": 2,
+              "GfX": 3,
+              "GfY": 4,
+              "Lat": 5,
+              "Lon": 6,
+              "Orientation": 7,
+              "RPM": 8,
+              "Sector": 9,
+              "Speed rear": 10,
+              "Speed_GPS": 1,
+              "T1": 11,
+              "T2": 12,
+              "docsInInterval": 20,
+              "lap": 0,
+              "msec_cumulative": 14,
+              "msec_in_lap": 15,
+              "row_cumulative": 16,
+              "row_in_lap": 17,
+              "sec_cumulative": 18,
+              "sec_in_lap": 19,
+              "time": 13,
+              "timeAsLong": 21,
+              "timeHash": 22
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-orange",
+            "mode": "shades"
+          },
+          "custom": {
+            "axisBorderShow": true,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "lap"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 1
+              },
+              {
+                "id": "custom.lineInterpolation",
+                "value": "stepBefore"
+              },
+              {
+                "id": "custom.axisSoftMin",
+                "value": 1
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 25
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 40
+              },
+              {
+                "id": "custom.drawStyle",
+                "value": "line"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 16
+      },
+      "id": 14,
+      "interval": "1ms",
+      "maxDataPoints": 10000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "parsedQuery": "OSRA.tsMetrics.aggregate([{\"$sort\":{\"time\":1}},{\"$match\":{\"time\":{\"$gte\":$__timeFrom,\"$lte\":$__timeTo}}},{\"$setWindowFields\":{\"sortBy\":{\"time\":1},\"output\":{\"docsInInterval\":{\"$sum\":1,\"window\":{\"unit\":\"millisecond\",\"range\":[{\"$subtract\":[-1,{\"$toLong\":{\"$divide\":[{\"$subtract\":[{\"$toLong\":$__timeTo},{\"$toLong\":$__timeFrom}]},10000]}}]},\"current\"]}}}}},{\"$addFields\":{\"timeAsLong\":{\"$toLong\":\"$time\"}}},{\"$addFields\":{\"timeHash\":{\"$mod\":[\"$timeAsLong\",\"$docsInInterval\"]}}},{\"$match\":{\"timeHash\":0}},{\"$limit\":10000},{\"$project\":{\"_id\":false,\"labels\":false,\"grafanaFilter\":false,\"wallClockUtc\":false}},{\"$project\":{\"time\":1,\"RPM\":1,\"lap\":1}}])",
+          "query": "OSRA.tsMetrics.aggregate([\n   {$sort:{time:1}},\n   {$match:{\n         time:{$gte:$__timeFrom, $lte:$__timeTo}}},\n   {$setWindowFields: {\n         sortBy: { time: 1 },\n         output: {\n               docsInInterval:{\n               $sum:1,\n               window: {\n                  unit:\"millisecond\",\n                  range:[\n                     {$subtract:[-1,{$toLong:{$divide:[{$subtract:[{$toLong:$__timeTo},{$toLong:$__timeFrom}]},10000]}}]},\n                     \"current\"\n                  ],\n               }\n               }\n         }\n         \n      }},\n   {$addFields:{\n   timeAsLong:{$toLong:\"$time\"},\n   }\n   },\n      {$addFields:{\n         timeHash:{$mod:[\"$timeAsLong\",\"$docsInInterval\"]}\n      }},\n      {$match:{timeHash:0}},\n   {$limit:10000},\n   {$project:{_id:false,labels:false,grafanaFilter:false,wallClockUtc:false}},\n\n\n\n   {$project:{time:1,RPM:1,lap:1}}\n])",
+          "queryType": "query",
+          "refId": "A"
+        }
+      ],
+      "title": "RPM",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-orange",
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": true,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "lap"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 1
+              },
+              {
+                "id": "custom.lineInterpolation",
+                "value": "stepBefore"
+              },
+              {
+                "id": "custom.axisSoftMin",
+                "value": 1
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 21
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 40
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "hidden"
+              },
+              {
+                "id": "custom.drawStyle",
+                "value": "line"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "T1"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "left"
+              },
+              {
+                "id": "custom.lineInterpolation",
+                "value": "stepBefore"
+              },
+              {
+                "id": "custom.axisSoftMax"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 21
+      },
+      "id": 15,
+      "interval": "1ms",
+      "maxDataPoints": 10000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "parsedQuery": "OSRA.tsMetrics.aggregate([{\"$sort\":{\"time\":1}},{\"$match\":{\"time\":{\"$gte\":$__timeFrom,\"$lte\":$__timeTo}}},{\"$setWindowFields\":{\"sortBy\":{\"time\":1},\"output\":{\"docsInInterval\":{\"$sum\":1,\"window\":{\"unit\":\"millisecond\",\"range\":[{\"$subtract\":[0,{\"$toLong\":{\"$divide\":[{\"$subtract\":[{\"$toLong\":$__timeTo},{\"$toLong\":$__timeFrom}]},10000]}}]},\"current\"]}}}}},{\"$addFields\":{\"timeAsLong\":{\"$toLong\":\"$time\"}}},{\"$addFields\":{\"timeHash\":{\"$mod\":[\"$timeAsLong\",\"$docsInInterval\"]}}},{\"$match\":{\"timeHash\":0}},{\"$limit\":10000},{\"$project\":{\"_id\":false,\"labels\":false,\"grafanaFilter\":false,\"wallClockUtc\":false}},{\"$project\":{\"time\":1,\"T1\":1,\"T2\":2,\"lap\":1}}])",
+          "query": "OSRA.tsMetrics.aggregate([\n   {$sort:{time:1}},\n   {$match:{\n         time:{$gte:$__timeFrom, $lte:$__timeTo}}},\n   {$setWindowFields: {\n         sortBy: { time: 1 },\n         output: {\n               docsInInterval:{\n               $sum:1,\n               window: {\n                  unit:\"millisecond\",\n                  range:[\n                     {$subtract:[0,{$toLong:{$divide:[{$subtract:[{$toLong:$__timeTo},{$toLong:$__timeFrom}]},10000]}}]},\n                     \"current\"\n                  ],\n\n               }\n               }\n         }\n         \n      }},\n   {$addFields:{\n   timeAsLong:{$toLong:\"$time\"},\n   }\n   },\n      {$addFields:{\n         timeHash:{$mod:[\"$timeAsLong\",\"$docsInInterval\"]}\n      }},\n      {$match:{timeHash:0}},\n   {$limit:10000},\n   {$project:{_id:false,labels:false,grafanaFilter:false,wallClockUtc:false}},\n\n\n\n   {$project:{time:1,T1:1,T2:2,lap:1}}\n])",
+          "queryType": "query",
+          "refId": "A"
+        }
+      ],
+      "title": "Temp",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "time"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "T1": 2,
+              "T2": 3,
+              "lap": 0,
+              "time": 1
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-orange",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": true,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "left",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "lap"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.lineInterpolation",
+                "value": "stepBefore"
+              },
+              {
+                "id": "custom.axisSoftMin",
+                "value": 1
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 21
+              },
+              {
+                "id": "custom.axisSoftMax",
+                "value": 40
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "hidden"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byValue",
+              "options": {
+                "op": "gte",
+                "reducer": "max",
+                "value": 100
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "left"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byValue",
+              "options": {
+                "op": "gte",
+                "reducer": "max",
+                "value": 1000
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byValue",
+              "options": {
+                "op": "lt",
+                "reducer": "max",
+                "value": 100
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "auto"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Orientation"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 26
+      },
+      "id": 18,
+      "interval": "1ms",
+      "maxDataPoints": 10000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "parsedQuery": "OSRA.tsMetrics.aggregate([{\"$sort\":{\"time\":1}},{\"$match\":{\"time\":{\"$gte\":$__timeFrom,\"$lte\":$__timeTo}}},{\"$setWindowFields\":{\"sortBy\":{\"time\":1},\"output\":{\"docsInInterval\":{\"$sum\":1,\"window\":{\"unit\":\"millisecond\",\"range\":[{\"$subtract\":[-1,{\"$toLong\":{\"$divide\":[{\"$subtract\":[{\"$toLong\":$__timeTo},{\"$toLong\":$__timeFrom}]},2000]}}]},\"current\"]}}}}},{\"$addFields\":{\"timeAsLong\":{\"$toLong\":\"$time\"}}},{\"$addFields\":{\"timeHash\":{\"$mod\":[\"$timeAsLong\",\"$docsInInterval\"]}}},{\"$match\":{\"timeHash\":0}},{\"$limit\":2000},{\"$project\":{\"_id\":false,\"labels\":false,\"grafanaFilter\":false,\"wallClockUtc\":false}}])",
+          "query": "OSRA.tsMetrics.aggregate([\n   {$sort:{time:1}},\n   {$match:{\n         time:{$gte:$__timeFrom, $lte:$__timeTo}}},\n   {$setWindowFields: {\n         sortBy: { time: 1 },\n         output: {\n               docsInInterval:{\n               $sum:1,\n               window: {\n                  unit:\"millisecond\",\n                  range:[\n                     {$subtract:[-1,{$toLong:{$divide:[{$subtract:[{$toLong:$__timeTo},{$toLong:$__timeFrom}]},2000]}}]},\n                     \"current\"\n                  ],\n\n               }\n               }\n         }\n         \n      }},\n   {$addFields:{\n   timeAsLong:{$toLong:\"$time\"},\n   }\n   },\n      {$addFields:{\n         timeHash:{$mod:[\"$timeAsLong\",\"$docsInInterval\"]}\n      }},\n      {$match:{timeHash:0}},\n   {$limit:2000},\n   {$project:{_id:false,labels:false,grafanaFilter:false,wallClockUtc:false}},\n\n\n\n])",
+          "queryType": "query",
+          "refId": "A"
+        }
+      ],
+      "title": "Pick and choose...",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Altitude": true,
+              "Lat": true,
+              "Lon": true,
+              "docsInInterval": true,
+              "msec_cumulative": true,
+              "msec_in_lap": true,
+              "row_cumulative": true,
+              "row_in_lap": true,
+              "sec_cumulative": true,
+              "sec_in_lap": true,
+              "timeAsLong": true,
+              "timeHash": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-mongodb-datasource",
+        "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+      },
+      "description": "by date, track and laps",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-blue",
+            "mode": "shades"
+          },
+          "custom": {
+            "axisBorderShow": true,
+            "axisCenteredZero": true,
+            "axisColorMode": "text",
+            "axisGridShow": true,
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 2,
+            "axisSoftMin": -2,
+            "fillOpacity": 22,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P.hcn"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-BlPu"
+                }
+              },
+              {
+                "id": "fieldMinMax",
+                "value": true
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 0
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              },
+              {
+                "id": "decimals"
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "1": {
+                        "index": 0,
+                        "text": "hot"
+                      },
+                      "-1": {
+                        "index": 1,
+                        "text": "cold"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 32
+      },
+      "id": 22,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 1,
+        "fullHighlight": true,
+        "groupWidth": 0.16,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "always",
+        "stacking": "none",
+        "text": {
+          "valueSize": 20
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "asc"
+        },
+        "xField": "P.time",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 100
+      },
+      "pluginVersion": "10.4.0-65039",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "hide": true,
+          "parsedQuery": "OSRA.tsMetrics.aggregate([{\"$addFields\":{\"nullrow\":{\"$subtract\":[{\"$convert\":{\"input\":\"$labels.laps\",\"to\":\"int\"}},\"$lap\"]},\"lap\":{\"$cond\":{\"if\":{\"$lt\":[{\"$convert\":{\"input\":\"$labels.laps\",\"to\":\"int\"}},\"$lap\"]},\"then\":null,\"else\":\"$lap\"}},\"total_laps\":{\"$cond\":{\"if\":{\"$lt\":[{\"$convert\":{\"input\":\"$labels.laps\",\"to\":\"int\"}},\"$lap\"]},\"then\":null,\"else\":\"$labels.laps\"}},\"timeAsLong\":{\"$toLong\":\"$time\"}}},{\"$group\":{\"_id\":{\"date\":\"$labels.date\",\"time\":\"$labels.time\",\"track\":\"$labels.track\",\"lap\":\"$lap\",\"sess\":\"$sess2\"},\"total_laps\":{\"$max\":\"$total_laps\"},\"lap\":{\"$max\":\"$lap\"},\"time\":{\"$min\":\"$time\"},\"timeAsLong\":{\"$min\":\"$timeAsLong\"},\"timeAsLongEnd\":{\"$max\":\"$timeAsLong\"},\"lap_time\":{\"$max\":\"$sec_in_lap\"},\"sess\":{\"$first\":\"$sess\"}}},{\"$addFields\":{\"timeAsLongDay\":{\"$add\":[\"$timeAsLong\",50000000]}}},{\"$addFields\":{\"url\":{\"$concat\":[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{\"$toString\":\"$timeAsLong\"},\"&to=\",{\"$toString\":\"$timeAsLongEnd\"}]}}},{\"$addFields\":{\"url24h\":{\"$concat\":[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{\"$toString\":\"$timeAsLong\"},\"&to=\",{\"$toString\":\"$timeAsLongDay\"}]}}}])",
+          "query": "OSRA.tsMetrics.aggregate([\n   {$addFields:{\n         nullrow:{$subtract:[{$convert:{  input:\"$labels.laps\",to:\"int\"}},\"$lap\"]},\n      lap:{$cond:{if:{$lt:[{$convert:{  input:\"$labels.laps\",to:\"int\"}},\"$lap\"]}, then:null, else:\"$lap\"}},\n      total_laps:{$cond:{if:{$lt:[{$convert:{  input:\"$labels.laps\",to:\"int\"}},\"$lap\"]}, then:null, else:\"$labels.laps\"}},\n      timeAsLong:{$toLong:\"$time\"},\n   }},\n   {$group:{_id:{date:\"$labels.date\", time:\"$labels.time\", track:\"$labels.track\", lap:\"$lap\", sess:\"$sess2\"},\n            total_laps:{\n               $max:\"$total_laps\",\n               },\n               lap:{$max:\"$lap\"},\n               time:{$min:\"$time\"},\n               timeAsLong:{$min:\"$timeAsLong\"},\n              timeAsLongEnd:{$max:\"$timeAsLong\"},\n            lap_time:{$max:\"$sec_in_lap\"},\n            sess:{$first:\"$sess\"},\n           }\n  } ,\n  {$addFields:{timeAsLongDay:{$add:[\"$timeAsLong\", 50000000]}}},\n  {$addFields:{url:{$concat:[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{$toString:\"$timeAsLong\"},\"&to=\",{$toString:\"$timeAsLongEnd\"}]}}},\n  {$addFields:{url24h:{$concat:[\"https://albertingo.grafana.net/public-dashboards/af77d02b79094be7afdf6f50bb40c46a?orgId=1&from=\",{$toString:\"$timeAsLong\"},\"&to=\",{$toString:\"$timeAsLongDay\"}]}}},\n   \n])",
+          "queryType": "query",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "grafana-mongodb-datasource",
+            "uid": "f801b19b-9d40-43a4-86ad-3f8ebba92c52"
+          },
+          "hide": false,
+          "parsedQuery": "OSRA.tyres.aggregate([{\"$sort\":{\"time\":1}},{\"$match\":{\"time\":{\"$gte\":$__timeFrom,\"$lte\":$__timeTo}}},{\"$setWindowFields\":{\"sortBy\":{\"time\":1},\"output\":{\"docsInInterval\":{\"$sum\":1,\"window\":{\"unit\":\"millisecond\",\"range\":[{\"$subtract\":[-1,{\"$toLong\":{\"$divide\":[{\"$subtract\":[{\"$toLong\":$__timeTo},{\"$toLong\":$__timeFrom}]},10000]}}]},\"current\"]}}}}},{\"$addFields\":{\"timeAsLong\":{\"$toLong\":\"$time\"},\"time2\":{\"$arrayElemAt\":[\"$times\",1]},\"datetime\":{\"$concat\":[\"$cold.labels.date\",\"T\",\"$cold.labels.time\"]}}},{\"$addFields\":{\"timeHash\":{\"$mod\":[\"$timeAsLong\",\"$docsInInterval\"]}}},{\"$match\":{\"timeHash\":0}},{\"$limit\":10000},{\"$project\":{\"datetime\":true,\"source_csv\":true,\"cold\":{\"immatriculation\":true,\"ambient\":{\"T_cold\":{\"$ifNull\":[\"$cold.ambient.T_cold\",-9999]},\"T_hot\":{\"$ifNull\":[\"$cold.ambient.T_hot\",-9999]}},\"front\":{\"left\":{\"P\":true,\"T1\":true,\"T2\":true,\"T3\":true},\"right\":{\"T3\":true,\"T2\":true,\"T1\":true,\"P\":true}},\"rear\":{\"left\":{\"P\":true,\"T1\":true,\"T2\":true,\"T3\":true},\"right\":{\"T3\":true,\"T2\":true,\"T1\":true,\"P\":true}},\"time\":true,\"time2\":true},\"hot\":{\"immatriculation\":{\"$toLong\":\"$immatriculation\"},\"ambient\":{\"T_cold\":{\"$ifNull\":[\"$cold.ambient.T_cold\",-9999]},\"T_hot\":{\"$ifNull\":[\"$cold.ambient.T_hot\",-9999]}},\"front\":{\"left\":{\"P\":true,\"T1\":true,\"T2\":true,\"T3\":true},\"right\":{\"T3\":true,\"T2\":true,\"T1\":true,\"P\":true}},\"rear\":{\"left\":{\"P\":true,\"T1\":true,\"T2\":true,\"T3\":true},\"right\":{\"T3\":true,\"T2\":true,\"T1\":true,\"P\":true}},\"time\":true},\"time\":true,\"time2\":true}},{\"$project\":{\"P\":[{\"rear_left\":{\"$multiply\":[-1,\"$cold.rear.left.P\"]},\"front_left\":\"$cold.front.left.P\",\"front_right\":\"$cold.front.right.P\",\"rear_right\":{\"$multiply\":[-1,\"$cold.rear.right.P\"]},\"hotcold\":\"cold\",\"hcn\":-1,\"time\":\"$time\"},{\"rear_left\":{\"$multiply\":[-1,\"$hot.rear.left.P\"]},\"front_left\":\"$hot.front.left.P\",\"front_right\":\"$hot.front.right.P\",\"rear_right\":{\"$multiply\":[-1,\"$hot.rear.right.P\"]},\"hotcold\":\"hot\",\"hcn\":1,\"time\":\"$time2\"}]}},{\"$unwind\":\"$P\"},{\"$sort\":{\"time\":1}}])",
+          "query": "OSRA.tyres.aggregate([\n   {$sort:{time:1}},\n   {$match:{\n         time:{$gte:$__timeFrom, $lte:$__timeTo}}},\n   {$setWindowFields: {\n         sortBy: { time: 1 },\n         output: {\n               docsInInterval:{\n               $sum:1,\n               window: {\n                  unit:\"millisecond\",\n                  range:[\n                     {$subtract:[-1,{$toLong:{$divide:[{$subtract:[{$toLong:$__timeTo},{$toLong:$__timeFrom}]},10000]}}]},\n                     \"current\"\n                  ],\n               }\n               }\n         }\n         \n      }},\n   {$addFields:{\n   timeAsLong:{$toLong:\"$time\"},\n   time2:{$arrayElemAt:[\"$times\",1]},\n   datetime:{$concat:[\"$cold.labels.date\",\"T\",\"$cold.labels.time\"]}\n   }\n   },\n      {$addFields:{\n         timeHash:{$mod:[\"$timeAsLong\",\"$docsInInterval\"]}\n      }},\n      {$match:{timeHash:0}},\n   {$limit:10000},\n\n\n\n\n\n   {$project:{\ndatetime:true,\nsource_csv:true,\ncold:{\n   immatriculation:true,\n   ambient:{\n      T_cold:{$ifNull:[\"$cold.ambient.T_cold\",-9999]},\n      T_hot:{$ifNull:[\"$cold.ambient.T_hot\",-9999]},\n   }, \n   front:{\n      left:{\n         P:true,\n         T1:true,\n         T2:true,\n         T3:true\n   },\n   right:{\n      T3:true,\n      T2:true,\n      T1:true,\n      P:true\n   }\n},\nrear:{\n   left:{\n      P:true,\n      T1:true,\n      T2:true,\n      T3:true\n   },\n   right:{\n      T3:true,\n      T2:true,\n      T1:true,\n      P:true\n   }\n},\ntime:true,\ntime2:true,\n},\n\n\nhot:{\n   immatriculation:{$toLong:\"$immatriculation\"},\n   ambient:{\n      T_cold:{$ifNull:[\"$cold.ambient.T_cold\",-9999]},\n      T_hot:{$ifNull:[\"$cold.ambient.T_hot\",-9999]},\n   },\n   front:{\n      left:{\n         P:true,\n         T1:true,\n         T2:true,\n         T3:true\n   },\n   right:{\n      T3:true,\n      T2:true,\n      T1:true,\n      P:true\n   }\n},\nrear:{\n   left:{\n      P:true,\n      T1:true,\n      T2:true,\n      T3:true\n   },\n   right:{\n      T3:true,\n      T2:true,\n      T1:true,\n      P:true\n   }\n},\ntime:true,\n},\ntime:true,\ntime2:true,\n\n}},\n\n\n\n{$project:{\n   P:[{rear_left:{$multiply:[-1,\"$cold.rear.left.P\"]},\n                  front_left:\"$cold.front.left.P\",\n                  front_right:\"$cold.front.right.P\",\n                  rear_right:{$multiply:[-1,\"$cold.rear.right.P\"]},\n                  hotcold: \"cold\",\n                  hcn:-1,\n                  time:\"$time\",\n                  },\n                  {rear_left:{$multiply:[-1,\"$hot.rear.left.P\"]},\n                  front_left:\"$hot.front.left.P\",\n                  front_right:\"$hot.front.right.P\",\n                  rear_right:{$multiply:[-1,\"$hot.rear.right.P\"]},\n                  hotcold: \"hot\",\n                  hcn: 1,\n                  time:\"$time2\",\n                  }],\n}},\n{$unwind:\"$P\"},\n{$sort:{time:1}},\n\n\n\n])",
+          "queryType": "query",
+          "refId": "A"
+        }
+      ],
+      "title": "Tyre pressure ",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "P.front_left": 1,
+              "P.front_right": 3,
+              "P.hcn": 2,
+              "P.hotcold": 4,
+              "P.rear_left": 0,
+              "P.rear_right": 5,
+              "P.time": 7,
+              "_id": 6
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "barchart"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2023-07-12T23:52:23.293Z",
+    "to": "2023-09-13T11:43:12.823Z"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {
+    "hidden": false,
+    "nowDelay": "1m",
+    "refresh_intervals": [
+      "20h"
+    ]
+  },
+  "timezone": "utc",
+  "title": "racing timeline public",
+  "uid": "ccc095e5-97d4-47ec-a4e9-5b5edc6aba0c",
+  "version": 66,
+  "weekStart": "monday"
+}
